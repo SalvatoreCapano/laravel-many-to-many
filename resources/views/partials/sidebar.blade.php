@@ -19,14 +19,14 @@
             <li class="nav-item">
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.types.index' ? 'bg-secondary' : '' }}"
                     href="{{ route('admin.types.index') }}">
-                    <i class="fa-solid fa-folder-tree fa-lg fa-fw"></i></i> Tipi
+                    <i class="fa-solid fa-folder-tree fa-lg fa-fw"></i></i> {{ __('page.type') }}
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.technologies.index' ? 'bg-secondary' : '' }}"
                     href="{{ route('admin.technologies.index') }}">
-                    <i class="fa-brands fa-html5 fa-lg fa-fw"></i></i> Tipi
+                    <i class="fa-brands fa-html5 fa-lg fa-fw"></i></i> {{ __('page.technologies') }}
                 </a>
             </li>
 

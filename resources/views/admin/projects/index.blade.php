@@ -30,8 +30,7 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">{{ __('page.title') }}</th>
-                            <th scope="col">Tipo</th>
-                            {{-- <th scope="col">Tecnologie</th> --}}
+                            <th scope="col">{{ __('page.type') }}</th>
                             <th scope="col">{{ __('page.status') }}</th>
                             <th scope="col">{{ __('page.actions') }}</th>
                         </tr>
@@ -40,19 +39,21 @@
                         @foreach ($projects as $project)
                             <tr>
                                 <th scope="row">{{ $project->id }}</th>
+
                                 <td>{{ $project->title }}</td>
-                                <td>{{ $project->type->name ?? 'Nessuno' }}</td>
-
-                                {{-- <td>
-                                    @if ($project->technology)
-                                        @foreach ($project->technology as $tech)
-                                            {{ $tech->name }}
-                                        @endforeach
+                                <td>
+                                    @if ($project->type)
+                                        @if ($project->type->name == 'front_end')
+                                            Front End
+                                        @elseif ($project->type->name == 'back_end')
+                                            Back End
+                                        @elseif ($project->type->name == 'full_stack')
+                                            Full Stack
+                                        @endif
                                     @else
-                                        Nessuna
+                                        -
                                     @endif
-                                </td> --}}
-
+                                </td>
                                 <td>
                                     @if ($project->status == 'completed')
                                         {{ __('page.completed') }}
@@ -64,14 +65,11 @@
                                         {{ __('page.cancelled') }}
                                     @endif
                                 </td>
-
                                 <td>
                                     <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-primary">
-                                        {{-- Dettagli --}}
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                     <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning">
-                                        {{-- Aggiorna --}}
                                         <i class="fa-solid fa-wrench"></i>
                                     </a>
                                     <form class="d-inline-block"
@@ -80,7 +78,6 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">
-                                            {{-- Elimina --}}
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </form>

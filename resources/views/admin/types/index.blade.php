@@ -29,23 +29,33 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Azioni</th>
+                            <th scope="col">{{ __('page.name') }}</th>
+                            <th scope="col">{{ __('page.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($types as $type)
                             <tr>
                                 <th scope="row">{{ $type->id }}</th>
-                                <td>{{ $type->name }}</td>
+                                <td>
+                                    @if ($type)
+                                        @if ($type->name == 'front_end')
+                                            Front End
+                                        @elseif ($type->name == 'back_end')
+                                            Back End
+                                        @elseif ($type->name == 'full_stack')
+                                            Full Stack
+                                        @endif
+                                    @else
+                                        -
+                                    @endif
+                                </td>
 
                                 <td>
                                     <a href="{{ route('admin.types.show', $type->id) }}" class="btn btn-primary">
-                                        {{-- Dettagli --}}
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                     <a href="{{ route('admin.types.edit', $type->id) }}" class="btn btn-warning">
-                                        {{-- Aggiorna --}}
                                         <i class="fa-solid fa-wrench"></i>
                                     </a>
                                     <form class="d-inline-block" action="{{ route('admin.types.destroy', $type->id) }}"
@@ -54,7 +64,6 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">
-                                            {{-- Elimina --}}
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </form>

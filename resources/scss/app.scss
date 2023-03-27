@@ -24,3 +24,28 @@ main {
         height: 200px;
     }
 }
+
+.customList {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+
+    li {
+        text-transform: capitalize;
+        background-color: lightgrey;
+        border-radius: 6px;
+        padding: 2px 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e2e2e2;
+        }
+    }
+}
+
+.nav-item {
+    &:hover {
+        background-color: rgb(126, 125, 125);
+    }
+}

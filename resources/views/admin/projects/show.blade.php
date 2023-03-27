@@ -11,10 +11,13 @@
                 @include('partials.success')
 
                 <div class="card">
+
                     <div class="card-header fw-bold">
                         #{{ $project->id }} - {{ $project->title }}
                     </div>
+
                     <div class="card-body">
+
                         <div class="row">
                             <div class="imgContainer col-3 mb-4">
                                 @if ($project->image)
@@ -24,31 +27,44 @@
                                 @endif
                             </div>
                         </div>
-                        <h5 class="card-title">Tipo</h5>
-                        @if ($project->type)
-                            <p class="card-text">{{ $project->type->name }}</p>
-                        @else
-                            <p>Nessun tipo impostato</p>
-                        @endif
-                        <h5 class="card-title">{{ __('page.description') }}</h5>
-                        <p class="card-text">{{ $project->description }}</p>
-                        <p>
-                            <span class="fw-bold">Tecnologie:</span>
-                            {{-- {{ $technologies->name }} --}}
-                            @if ($technologies)
-                                @foreach ($technologies as $tech)
-                                    {{ $tech->name }}
-                                @endforeach
-                                {{-- TEST --}}
+
+                        <div class="mb-3">
+                            <h5 class="card-title">{{ __('page.description') }}</h5>
+                            <p class="card-text">{{ $project->description }}</p>
+                        </div>
+
+                        <div class="mb-3">
+                            <span class="fw-bold">{{ __('page.type') }}:</span>
+                            @if ($project->type)
+                                <span>{{ $project->type->name }}</span>
                             @else
-                                Nessuna
+                                <span>{{ __('page.no_type') }}</span>
                             @endif
-                            {{-- {{ dd($project->technologies) }} --}}
-                        </p>
-                        <p>
+                        </div>
+
+                        <div class="mb-3">
+                            <span class="fw-bold">{{ __('page.technologies') }}:</span>
+                            @if ($technologies)
+                                <ul class="customList">
+                                    @foreach ($technologies as $tech)
+                                        <li>
+                                            <a href="{{ route('admin.technologies.show', $tech->id) }}" class="text-decoration-none text-reset">
+                                                {{ $tech->name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                {{ __('page.no_technologies') }}
+                            @endif
+                        </div>
+
+                        <div class="mb-3">
                             <span class="fw-bold">Slug:</span>
-                            {{ $project->slug }}
-                        </p>
+                            <span>{{ $project->slug }}</span>
+                        </div>
+
+
                         <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning">
                             <i class="fa-solid fa-wrench"></i> {{ __('page.edit') }}
                         </a>
@@ -57,11 +73,11 @@
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger">
-                                {{-- Elimina --}}
                                 <i class="fa-solid fa-trash-can"></i> {{ __('page.delete') }}
                             </button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>

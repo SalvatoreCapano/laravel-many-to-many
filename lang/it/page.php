@@ -12,11 +12,18 @@ return [
     'projectsTitle' => 'Tutti i progetti',
     'btnAdd' => 'Aggiungi Progetto',
     'title' => 'Titolo',
+    'type' => 'Tipo',
     'status' => 'Stato',
     'actions' => 'Azioni',
     'description' => 'Descrizione',
+    'name' => 'Nome',
     'show' => 'Dettagli',
     'edit' => 'Aggiorna',
     'delete' => 'Elimina',
+    'no_type' => 'Nessun tipo impostato',
+    'no_technologies' => 'Nessuna tecnologia impostata',
+    'technologies' => 'Tecnologie',
+    'related_projects' => 'Progetti Associati',
+    'related_projects_msg' => 'Nessun Progetto Associato'
 
 ];

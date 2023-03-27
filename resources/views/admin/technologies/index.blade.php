@@ -22,25 +22,27 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Nome</th>
+                            <th scope="col">{{ __('page.name') }}</th>
                             <th scope="col">Slug</th>
-                            <th scope="col"># Progetti</th>
-                            <th scope="col">Azioni</th>
+                            <th scope="col"># {{ __('page.projects') }}</th>
+                            <th scope="col">{{ __('page.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($technologies as $technology)
                             <tr>
                                 <th scope="row">{{ $technology->id }}</th>
-                                <td>{{ $technology->name }}</td>
+                                <td>
+                                    <span class="text-capitalize">{{ $technology->name }}</span>
+                                </td>
                                 <td>{{ $technology->slug }}</td>
                                 <td>{{ $technology->projects()->count() }}</td>
                                 <td>
                                     <a href="{{ route('admin.technologies.show', $technology->id) }}" class="btn btn-primary">
-                                        Dettagli
+                                        <i class="fa-solid fa-eye"></i>
                                     </a>
                                     <a href="{{ route('admin.technologies.edit', $technology->id) }}" class="btn btn-warning">
-                                        Aggiorna
+                                        <i class="fa-solid fa-wrench"></i>
                                     </a>
                                     <form
                                         class="d-inline-block"
@@ -50,7 +52,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">
-                                            Elimina
+                                            <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </form>
                                 </td>

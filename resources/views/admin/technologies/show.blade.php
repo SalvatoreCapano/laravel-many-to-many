@@ -7,14 +7,16 @@
                 @include('partials.success')
 
                 <h1>
-                    {{ $technology->name }}
+                    <span class="text-capitalize">
+                        {{ $technology->name }}
+                    </span>
                 </h1>
                 <h6>
                     Slug: {{ $technology->slug }}
                 </h6>
 
                 <h2>
-                    Articoli associati ({{ $technology->projects()->count() }})
+                    {{ __('page.related_projects') }} ({{ $technology->projects()->count() }})
                 </h2>
                 @if ($technology->projects()->count() > 0)
                     <ul>
@@ -28,7 +30,7 @@
                     </ul>
                 @else
                     <h3>
-                        Nessun progetto associato
+                        {{ __('page.related_projects_msg') }}
                     </h3>
                 @endif
             </div>
