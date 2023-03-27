@@ -17,6 +17,7 @@ use App\Mail\NewProject;
 
 // Models
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -40,7 +41,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -62,6 +64,10 @@ class ProjectController extends Controller
 
         $newProject = Project::create($data);
 
+        if (array_key_exists('technologies', $data)){
+            $newProject->technologies()->sync($data['technologies']);
+        }
+
         Mail::to([
             'mariorossi@mail.com',
             'mariabianchi@mail.com',
@@ -80,7 +86,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('project'));
+        $technologies = $project->technologies;
+
+        return view('admin.projects.show', compact('project', 'technologies'));
     }
 
     /**
@@ -92,7 +100,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -119,6 +128,13 @@ class ProjectController extends Controller
         $data['slug'] = Str::slug($data['title']);
 
         $project->update($data);
+
+        if (array_key_exists('technologies', $data)){
+            $project->technologies()->sync($data['technologies']);
+        }
+        else{
+            $project->technologies()->sync([]);
+        }
 
         return redirect()->route('admin.projects.show', $project->id)->with('succes', 'Progetto aggiornato con successo.');
     }

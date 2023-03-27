@@ -30,6 +30,8 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">{{ __('page.title') }}</th>
+                            <th scope="col">Tipo</th>
+                            {{-- <th scope="col">Tecnologie</th> --}}
                             <th scope="col">{{ __('page.status') }}</th>
                             <th scope="col">{{ __('page.actions') }}</th>
                         </tr>
@@ -39,15 +41,26 @@
                             <tr>
                                 <th scope="row">{{ $project->id }}</th>
                                 <td>{{ $project->title }}</td>
+                                <td>{{ $project->type->name ?? 'Nessuno' }}</td>
+
+                                {{-- <td>
+                                    @if ($project->technology)
+                                        @foreach ($project->technology as $tech)
+                                            {{ $tech->name }}
+                                        @endforeach
+                                    @else
+                                        Nessuna
+                                    @endif
+                                </td> --}}
 
                                 <td>
                                     @if ($project->status == 'completed')
                                         {{ __('page.completed') }}
-                                        @elseif ($project->status == 'active')
+                                    @elseif ($project->status == 'active')
                                         {{ __('page.active') }}
-                                        @elseif ($project->status == 'on_hold')
+                                    @elseif ($project->status == 'on_hold')
                                         {{ __('page.on_hold') }}
-                                        @elseif ($project->status == 'cancelled')
+                                    @elseif ($project->status == 'cancelled')
                                         {{ __('page.cancelled') }}
                                     @endif
                                 </td>

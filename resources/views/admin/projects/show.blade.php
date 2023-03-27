@@ -33,6 +33,19 @@
                         <h5 class="card-title">{{ __('page.description') }}</h5>
                         <p class="card-text">{{ $project->description }}</p>
                         <p>
+                            <span class="fw-bold">Tecnologie:</span>
+                            {{-- {{ $technologies->name }} --}}
+                            @if ($technologies)
+                                @foreach ($technologies as $tech)
+                                    {{ $tech->name }}
+                                @endforeach
+                                {{-- TEST --}}
+                            @else
+                                Nessuna
+                            @endif
+                            {{-- {{ dd($project->technologies) }} --}}
+                        </p>
+                        <p>
                             <span class="fw-bold">Slug:</span>
                             {{ $project->slug }}
                         </p>

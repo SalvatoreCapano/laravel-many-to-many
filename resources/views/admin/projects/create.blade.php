@@ -46,6 +46,26 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label d-block mb-2">
+                            Tecnologie
+                        </label>
+                        @foreach ($technologies as $technology)
+                            <div class="form-check form-check-inline">
+                                <input
+                                    class="form-check-input"
+                                    name="technologies[]"
+                                    type="checkbox"
+                                    id="technology-{{ $technology->id }}"
+                                    {{ in_array($technology->id, old('tecnologies', [])) ? 'checked' : '' }}
+                                    value="{{ $technology->id }}">
+                                <label class="form-check-label" for="technology-{{ $technology->id }}">
+                                    {{ $technology->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="mb-3">
                         <label for="image" class="form-label">
                             Immagine
                         </label>

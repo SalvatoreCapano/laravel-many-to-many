@@ -15,10 +15,15 @@ class Project extends Model
         'status',
         'slug',
         'image',
-        'type_id'
+        'type_id',
+        // 'technologies'
     ];
 
     public function type() {
         return $this->belongsTo(Type::class);
+    }
+
+    public function technologies() {
+        return $this->belongsToMany(Technology::class);
     }
 }
