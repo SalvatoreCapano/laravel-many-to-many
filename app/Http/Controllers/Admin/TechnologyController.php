@@ -46,6 +46,8 @@ class TechnologyController extends Controller
 
         $data['slug'] = Str::slug($data['name']);
 
+        $data['name'] = Str::replace('-', '_', $data['slug']);
+
         $newTechnology = Technology::create($data);
 
         return redirect()->route('admin.technologies.show', $newTechnology->id)->with('succes', 'Tecnologia creata con successo.');
@@ -85,6 +87,8 @@ class TechnologyController extends Controller
         $data = $request->validated();
 
         $data['slug'] = Str::slug($data['name']);
+
+        $data['name'] = Str::replace('-', '_', $data['slug']);
 
         $technology->update($data);
 
