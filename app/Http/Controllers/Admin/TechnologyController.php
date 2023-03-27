@@ -7,6 +7,9 @@ use App\Models\Technology;
 use App\Http\Requests\StoreTechnologyRequest;
 use App\Http\Requests\UpdateTechnologyRequest;
 
+// Helpers
+use Illuminate\Support\Str;
+
 class TechnologyController extends Controller
 {
     /**
@@ -28,7 +31,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.technologies.create');
     }
 
     /**
@@ -37,10 +40,16 @@ class TechnologyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(StoreTechnologyRequest $request)
-    // {
-    //     //
-    // }
+    public function store(StoreTechnologyRequest $request)
+    {
+        $data = $request->validated();
+
+        $data['slug'] = Str::slug($data['name']);
+
+        $newTechnology = Technology::create($data);
+
+        return redirect()->route('admin.technologies.show', $newTechnology->id)->with('succes', 'Tecnologia creata con successo.');
+    }
 
     /**
      * Display the specified resource.
@@ -61,7 +70,7 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
-        //
+        return view('admin.technologies.edit', compact('technology'));
     }
 
     /**
@@ -71,10 +80,16 @@ class TechnologyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(UpdateTechnologyRequest $request, Technology $technology)
-    // {
-    //     //
-    // }
+    public function update(UpdateTechnologyRequest $request, Technology $technology)
+    {
+        $data = $request->validated();
+
+        $data['slug'] = Str::slug($data['name']);
+
+        $technology->update($data);
+
+        return redirect()->route('admin.technologies.show', $technology->id)->with('succes', 'Tecnologia aggiornata con successo.');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -84,6 +99,8 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+        $technology->delete();
+
+        return redirect()->route('admin.technologies.index')->with('succes', 'Tecnologia eliminata con successo.');
     }
 }

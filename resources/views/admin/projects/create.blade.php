@@ -86,7 +86,7 @@
 
                     <div>
                         <button type="submit" class="btn btn-success">
-                            Aggiungi
+                            {{ __('page.add') }}
                         </button>
                     </div>
 

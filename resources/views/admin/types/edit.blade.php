@@ -9,7 +9,7 @@
         <div class="row justify-content-center mb-4">
             <div class="col">
                 <h1>
-                    Modifica Tupo
+                    Modifica Tipo
                 </h1>
             </div>
         </div>

@@ -20,6 +20,7 @@ return [
     'show' => 'Dettagli',
     'edit' => 'Aggiorna',
     'delete' => 'Elimina',
+    'add' => 'Aggiungi',
     'no_type' => 'Nessun tipo impostato',
     'no_technologies' => 'Nessuna tecnologia impostata',
     'technologies' => 'Tecnologie',
